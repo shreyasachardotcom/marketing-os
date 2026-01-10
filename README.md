@@ -4,13 +4,25 @@ A minimal, transparent project management tool built specifically for Plum's 50-
 
 ## Features
 
+### Core Functionality
 - **Projects & Tasks**: Complete task management with stages (Backlog → To Do → In Progress → Creator Review → Reviewer Review → Done/Deferred)
-- **Kanban Board**: Visual drag-and-drop task management
-- **Calendar View**: Team-wide visibility of deadlines
-- **Team Transparency**: View everyone's workload
-- **Requisitions**: Non-marketing teams can request work
-- **Team Notes**: Wiki-style knowledge base with real-time collaboration
+- **Auto-Transitions**: Tasks automatically move from Backlog to To Do when start date arrives
+- **Smart Labels**: Tasks are automatically labeled as "On Track" or "Delayed" based on due dates
+- **Kanban Board**: Visual drag-and-drop task management across all stages
+- **Calendar View**: Month grid showing team-wide task deadlines
+- **Team Transparency**: View any team member's workload and tasks
+- **Requisitions**: Complete workflow for non-marketing teams to request work (P0-P3 priorities)
+
+### Collaboration & Knowledge
+- **Team Notes**: Wiki-style knowledge base with Files → Pages structure
+- **Edit History**: Track all changes to notes with full edit logs
 - **Google OAuth**: Secure authentication via Google Workspace
+
+### Admin Features
+- **User Management**: Admins can assign roles (Admin, Team Member, Requisitioner)
+- **CSV Export**: Export tasks, projects, and requisitions with date filtering
+- **Analytics Dashboard**: View team statistics, delayed tasks, and workload distribution
+- **Automated Jobs**: Daily cron jobs for task transitions and label updates
 
 ## Tech Stack
 
@@ -98,6 +110,25 @@ npx prisma migrate dev
 4. Install app to workspace
 5. Copy Bot Token and Signing Secret to `.env`
 
+## Automated Task Management
+
+The application includes automated task transitions and label updates:
+
+### Cron Job (Vercel)
+- Runs daily at midnight (UTC)
+- Auto-transitions tasks from Backlog to To Do when start date arrives
+- Updates task labels (On Track / Delayed) based on due dates
+- Configured in `vercel.json`
+
+### Manual Trigger
+You can manually trigger the cron job:
+```bash
+curl -X GET "https://your-domain.com/api/cron/task-transitions" \
+  -H "Authorization: Bearer YOUR_CRON_SECRET"
+```
+
+Set `CRON_SECRET` in your environment variables for security.
+
 ## Deployment
 
 ### Vercel (Recommended)
@@ -110,13 +141,17 @@ npx prisma migrate dev
 ### Environment Variables for Production
 
 Make sure to set all environment variables in your deployment platform:
-- `DATABASE_URL`
-- `NEXTAUTH_URL` (your production URL)
-- `NEXTAUTH_SECRET`
-- `GOOGLE_CLIENT_ID`
-- `GOOGLE_CLIENT_SECRET`
-- `SLACK_BOT_TOKEN`
-- `SLACK_SIGNING_SECRET`
+- `DATABASE_URL` - PostgreSQL connection string
+- `NEXTAUTH_URL` - Your production URL (e.g., https://marketing-os.vercel.app)
+- `NEXTAUTH_SECRET` - Random secret key (generate with `openssl rand -base64 32`)
+- `GOOGLE_CLIENT_ID` - From Google Cloud Console
+- `GOOGLE_CLIENT_SECRET` - From Google Cloud Console
+- `SLACK_BOT_TOKEN` - From Slack API (optional)
+- `SLACK_SIGNING_SECRET` - From Slack API (optional)
+- `CRON_SECRET` - Random secret for cron job authentication
+
+**Important**: Update Google OAuth authorized redirect URIs to include your production domain:
+- `https://your-domain.com/api/auth/callback/google`
 
 ## User Roles
 
