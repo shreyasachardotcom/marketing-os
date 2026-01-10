@@ -51,7 +51,7 @@ export async function GET(request: Request) {
         include: {
           project: true,
           assignee: true,
-          creator: true,
+          createdBy: true,
           reviewer: true,
         },
       });
@@ -64,7 +64,7 @@ export async function GET(request: Request) {
         label: task.label || "",
         project: task.project.title,
         assignee: task.assignee?.name || "",
-        creator: task.creator?.name || "",
+        creator: task.createdBy?.name || "",
         reviewer: task.reviewer?.name || "",
         startDate: task.startDate?.toISOString() || "",
         dueDate: task.dueDate?.toISOString() || "",

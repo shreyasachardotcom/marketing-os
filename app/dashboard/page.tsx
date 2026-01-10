@@ -19,7 +19,7 @@ async function getUserTasks(userId: string) {
     include: {
       project: true,
       assignee: true,
-      creator: true,
+      createdBy: true,
       reviewer: true,
     },
     orderBy: {
