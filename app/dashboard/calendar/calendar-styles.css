@@ -1,0 +1,111 @@
+/* Calendar custom styles matching the monochrome design system */
+
+.rbc-calendar {
+  font-family: 'Inter', sans-serif;
+}
+
+.rbc-header {
+  padding: 12px 0;
+  font-weight: 600;
+  font-size: 14px;
+  border-bottom: 2px solid #E5E5E5;
+}
+
+.rbc-month-view {
+  border: 1px solid #E5E5E5;
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.rbc-day-bg {
+  background: #FFFFFF;
+}
+
+.rbc-off-range-bg {
+  background: #F9F9F9;
+}
+
+.rbc-today {
+  background-color: #F0F7FF !important;
+}
+
+.rbc-event {
+  padding: 2px 4px;
+  border-radius: 4px;
+  border: none;
+  font-size: 12px;
+}
+
+.calendar-event-on-track {
+  background-color: #10B981;
+  color: white;
+}
+
+.calendar-event-delayed {
+  background-color: #EF4444;
+  color: white;
+}
+
+.rbc-event:hover {
+  opacity: 0.9;
+}
+
+.rbc-toolbar {
+  margin-bottom: 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.rbc-toolbar button {
+  color: #000000;
+  border: 1px solid #E5E5E5;
+  background: #FFFFFF;
+  padding: 6px 12px;
+  border-radius: 6px;
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.rbc-toolbar button:hover {
+  background: #F5F5F5;
+}
+
+.rbc-toolbar button:active,
+.rbc-toolbar button.rbc-active {
+  background: #3B82F6;
+  color: white;
+  border-color: #3B82F6;
+}
+
+.rbc-toolbar-label {
+  font-size: 20px;
+  font-weight: 600;
+  color: #000000;
+}
+
+.rbc-date-cell {
+  padding: 8px;
+  text-align: right;
+  font-size: 14px;
+  color: #404040;
+}
+
+.rbc-off-range .rbc-date-cell {
+  color: #808080;
+}
+
+.rbc-show-more {
+  color: #3B82F6;
+  font-size: 12px;
+  cursor: pointer;
+  text-decoration: underline;
+}
+
+.rbc-show-more:hover {
+  color: #2563EB;
+}
