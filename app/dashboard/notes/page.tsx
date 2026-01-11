@@ -1,4 +1,4 @@
-import { getServerSession } from "next/auth";
+import { getServerSession } from "next-auth";
 import { redirect } from "next/navigation";
 import { authOptions } from "@/lib/auth";
 import { prisma } from "@/lib/prisma";
@@ -63,7 +63,7 @@ export default async function NotesPage() {
       ) : (
         <div className="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3">
           {files.map((file) => (
-            <Card key={file.id} className="hover:shadow-md transition-shadow">
+            <Card key={file.id} className="transition-shadow hover:shadow-md">
               <CardHeader>
                 <CardTitle className="flex items-center gap-2">
                   <File className="h-5 w-5" />
